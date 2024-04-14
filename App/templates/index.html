@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}Flask MVC App{% endblock %}
-{% block page %}Flask MVC App{% endblock %}
+{% block title %}Fitness Forge{% endblock %}
+{% block page %}Fitness Forge{% endblock %}
 
 {{ super() }}
 
 {% block content %}
-    <h1>Flask MVC</h1>
+    <h1>Fitness Forge 💪</h1>
+    <img src="{{ url_for('static', filename='SiteBytes Logo - Main.png') }}" alt="SiteBytes Logo">
+    
     {% if is_authenticated %}
         <p> Welcome {{current_user.username}} </p>
     {% endif %}
