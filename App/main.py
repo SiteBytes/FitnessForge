@@ -5,9 +5,14 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
+import json
+
 
 from App.database import init_db
 from App.config import config
+from App.models.exercise import Exercise
+from App.models.user import User
+
 
 from App.controllers import (
     setup_jwt,
@@ -15,6 +20,7 @@ from App.controllers import (
 )
 
 from App.views import views
+from App.database import db
 
 def add_views(app):
     for view in views:
@@ -54,3 +60,16 @@ def create_app(config_overrides={}):
     app.app_context().push()
     return app
 
+
+
+def initialize_db():
+    db.drop_all()
+    db.create_all()
+    with open('exercises.json', 'r', encoding='utf8') as jsonfile:
+        data = json.load(jsonfile)
+        for row in data:
+            exercise = Exercise(name=row['name'], force=row['force'], level=row['level'], mechanic=row['mechanic'], equipment=row['equipment'], primaryMuscles=row['primaryMuscles'], secondaryMuscles=row['secondaryMuscles'], instructions=row['instructions'], category=row['category'], images=row['images'], id=row['id'])
+            db.session.add(exercise)
+        bob = User(username='bob', email="bob@mail.com", password="bobpass")
+        db.session.add(bob)
+        db.session.commit()
