@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.background {
+  background: linear-gradient(to left top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6)),
+              linear-gradient(to left bottom, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6));
+}
+
+.glass {
+  background: linear-gradient(to top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.9));
+  backdrop-filter: blur(5rem);
+}
+
+body {
+  background-color: #141000;
+  background-image: url('/images/topography.png');
+  background-size: cover;
+}
+
+header {
+  background: rgba(20, 16, 0, 0.95);
+  color: #141000;
+  margin: 1rem 1rem;
+  border: none;
+  border-radius: 2em;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 8vh;
+  max-height: 8vh;
+  padding: 0rem calc((100vw - 1300px) / 2);
+}
+
+.logo {
+  color: #f5c000;
+  font-size: 2rem;
+  letter-spacing: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a {
+  text-decoration: none;
+  color: #141000;
+  letter-spacing: 2px;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-left: 2rem;
+  background: #f5c000;
+  border: none;
+  border-radius: 2em;
+  padding: 0.5rem 1rem;
+}
+
+nav a:hover {
+  opacity: 0.7;
+}
+
+.body-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50em;
+  padding: 0rem calc((100vw - 1300px) / 2);
+  border: none;
+  border-radius: 2em;
+}
+
+.card {
+  padding: 2rem;
+  border: none;
+  border-radius: 2em;
+  box-shadow: 0px 0px 8em rgba(0, 0, 0, 0.7);
+}
+
+.column-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #141000;
+  padding: 0rem 2rem;
+}
+
+.column-left h1 {
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: 1000;
+}
+
+.column-left p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+button {
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  color: #f5c000;
+  background: #141000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.column-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 2rem;
+}
+
+.column-right img {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .body-container {
+    grid-template-columns: 1fr;
+  }
+}
