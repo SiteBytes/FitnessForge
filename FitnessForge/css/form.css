@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30% 20%;
+  border-radius: 2em;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 3em rgba(0, 0, 0, 0.15);
+  padding: 3em 5em;
+}
+
+.form-image {
+  width: 75%;
+  padding-bottom: 1em;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form-image:hover {
+  cursor: pointer;
+}
+
+section h1 {
+  text-align: center;
+  padding-bottom: 1em;
+  font-size: 2rem;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 1em 5em;
+  margin: 0.5em 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 3em;
+  box-sizing: border-box;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2em;
+}
+
+.column-left {
+  align-items: center;
+}
