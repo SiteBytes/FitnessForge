@@ -24,6 +24,11 @@ def identify_page():
     return render_template('message.html', title="Identify", message=f"You are logged in as {current_user.id} - {current_user.username}")
     
 
+@auth_views.route('/login')
+def login():
+    return render_template('login.html')
+
+
 @auth_views.route('/login', methods=['POST'])
 def login_action():
     data = request.form
