@@ -12,4 +12,10 @@
         <p> Welcome {{current_user.username}} </p>
     {% endif %}
     <p>This is the mc homepage.</p>
+
+    <ul>
+        {% for exercise in exercises %}
+            <li>{{ exercise.name }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -7,3 +7,6 @@ from App.models import Exercise
 
 def get_all_exercises():
     return Exercise.query.all()
+
+def get_user_exercises(user_id):
+    return Exercise.query.filter_by(user_id=user_id).all()

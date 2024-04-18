@@ -5,7 +5,8 @@ from .index import index_views
 
 from App.controllers import (
     login,
-    create_user
+    create_user,
+    get_all_exercises
 )
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')

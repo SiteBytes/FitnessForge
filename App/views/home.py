@@ -6,6 +6,7 @@ from sqlalchemy.exc import IntegrityError
 # from App.database import db
 # from App.models import
 from datetime import datetime
+from App.controllers import get_all_exercises
 
 
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
@@ -13,4 +14,5 @@ home_views = Blueprint('home_views', __name__, template_folder='../templates')
 @home_views.route('/home', methods=['GET'])
 @jwt_required()
 def home_page():
-    return render_template('home.html')
+    exercises = get_all_exercises()
+    return render_template('home.html', exercises=exercises)
