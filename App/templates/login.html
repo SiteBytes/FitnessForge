@@ -227,6 +227,17 @@
   .column-left {
     align-items: center;
   }
+
+  .small-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.5rem;
+    border: none;
+    border-radius: 50px;
+    color: #f5c000;
+    background: #141000;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 </style>
 <body>
   <main class="background">
@@ -246,6 +257,10 @@
                 <input name="password" type="password" placeholder="Password">
               </div>
               <button type="submit">Login</button>
+              <!-- <button class="small-btn" href="/signup">Sign Up</button> -->
+              <div>
+                <a href="/signup">Don't have an account? Sign Up</a>
+              </div>
             </form>
           </div>
         </section>
