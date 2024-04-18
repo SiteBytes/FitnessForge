@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-{% block title %}Fitness Forge{% endblock %}
-{% block page %}Fitness Forge{% endblock %}
+{% block title %}Fitness Forge HOMEPAGE{% endblock %}
+{% block page %}Fitness Forge HOMEPAGE{% endblock %}
 
 {{ super() }}
 
@@ -11,5 +11,5 @@
     {% if is_authenticated %}
         <p> Welcome {{current_user.username}} </p>
     {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
+    <p>This is the mc homepage.</p>
 {% endblock %}

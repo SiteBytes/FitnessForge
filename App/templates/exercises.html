@@ -6,10 +6,16 @@
 
 {% block content %}
     <h1>Fitness Forge 💪</h1>
-    <img src="{{ url_for('static', filename='SiteBytes Logo - Main.png') }}" alt="SiteBytes Logo">
+    
     
     {% if is_authenticated %}
         <p> Welcome {{current_user.username}} </p>
     {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
+    
+    <!-- show a list of all the exercises, retrieved from exercises db model, data for which comes from exercises.json -->
+    <ul>
+        {% for exercise in exercises %}
+            <li>{{ exercise.name }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
