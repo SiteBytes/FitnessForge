@@ -160,7 +160,7 @@
         <!-- <img class="logo" src="./SiteBytes Logo - Main.png"></img> -->
         <span class="logo">Fitness Forge</span>
         <div class="nav-items">
-          <a href="./routines.html">Routines</a>
+          <a href="/logout">Log Out</a>
         </div>
       </nav>
     </header>
@@ -174,12 +174,11 @@
               <a href="/login"><button>Sign Up</button></a>
             </div>
           </div>
-          </div>
           <div class="column-right">
             <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
           </div>
         {% else %}
-        <div>you is logged in so the card hidden now</div>
+        <div>you is logged in so the card hidden now, the list of exercises will go here</div>
         {% endif %}
     </section>
   </main>

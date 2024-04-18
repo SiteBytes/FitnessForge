@@ -9,3 +9,7 @@ def login_page():
         return render_template('login.html')
     else:
         return redirect(url_for('home_views.home_page'))
+
+@login_views.route('/signup', methods=['GET'])
+def signup_page():
+    return render_template('signup.html')
