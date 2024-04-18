@@ -165,12 +165,15 @@ button:hover {
     </header> 
     <section class="body">
       <div class="body-container">
+        {% if not current_user %}
         <div class="column-left">
           <div class="card glass">
             <h1>Make your body shape</h1>
             <p>Join Fitness Forge and get fit with our best-in-class Routines</p>
-            <a href="./login.html"><button>Sign Up</button></a>
+            <a href="/login"><button>Sign Up</button></a>
           </div>
+        </div>
+        {% endif %}
         </div>
         <div class="column-right">
           <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
