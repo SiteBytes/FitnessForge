@@ -64,7 +64,7 @@ def create_app(config_overrides={}):
 def initialize_db():
     db.drop_all()
     db.create_all()
-    with open('splitexercises.csv', newline='', encoding='utf8') as csvfile:
+    with open('finalexercises.csv', newline='', encoding='utf8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             if 'equipment' in row and row['equipment'] == '':
