@@ -6,7 +6,12 @@ from App.database import db
 from App.models import Exercise
 
 def get_all_exercises():
-    return Exercise.query.all()
+    exercises = Exercise.query.all()
+    return exercises
 
 def get_user_exercises(user_id):
-    return Exercise.query.filter_by(user_id=user_id).all()
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
+    user_exercises = Exercise.query.filter_by(user_id=user.id)
+    return user_exercises

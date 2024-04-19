@@ -2,21 +2,19 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
 class Exercise(db.Model):
-    __tablename__ = 'exercise'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False, unique=True)
-    force = db.Column(db.String, nullable=True)
-    level = db.Column(db.String, nullable=True)
-    mechanic = db.Column(db.String, nullable=True)
-    equipment = db.Column(db.String, nullable=True)
-    primaryMuscles = db.Column(db.String, nullable=True)
-    secondaryMuscles = db.Column(db.String, nullable=True)
-    instructions = db.Column(db.String, nullable=True)
-    category = db.Column(db.String, nullable=True)
-    images = db.Column(db.String, nullable=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String)
+    force = db.Column(db.String)
+    level = db.Column(db.String)
+    mechanic = db.Column(db.String)
+    equipment = db.Column(db.String)
+    primaryMuscles = db.Column(db.String)
+    secondaryMuscles = db.Column(db.String)
+    instructions = db.Column(db.String)
+    category = db.Column(db.String)
+    images = db.Column(db.String)
 
-    def __init__(self, name, force, level, mechanic, equipment, primaryMuscles, secondaryMuscles, instructions, category, images, id):
+    def __init__(self, name, force, level, mechanic, equipment, primaryMuscles, secondaryMuscles, instructions, category, images):
         self.name = name
         self.force = force
         self.level = level
@@ -27,10 +25,9 @@ class Exercise(db.Model):
         self.instructions = instructions
         self.category = category
         self.images = images
-        self.id = id
 
-    def get_json(self):
-        return{
+    def serialize(self):
+        return {
             'id': self.id,
             'name': self.name,
             'force': self.force,

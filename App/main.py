@@ -1,4 +1,4 @@
-import os
+import os, csv
 from flask import Flask, render_template
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
@@ -64,23 +64,35 @@ def create_app(config_overrides={}):
 def initialize_db():
     db.drop_all()
     db.create_all()
-    with open("exercises.json", "r", encoding="utf8") as jsonfile:
-        data = json.load(jsonfile)
-        for row in data:
+    with open('exercises.csv', newline='', encoding='utf8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if 'equipment' in row and row['equipment'] == '':
+                row['equipment'] = None
+            if 'primaryMuscles' in row and row['primaryMuscles'] == '':
+                row['primaryMuscles'] = None
+            if 'secondaryMuscles' in row and row['secondaryMuscles'] == '':
+                row['secondaryMuscles'] = None
+            if 'instructions' in row and row['instructions'] == '':
+                row['instructions'] = None
+            if 'category' in row and row['category'] == '':
+                row['category'] = None
+            if 'images' in row and row['images'] == '':
+                row['images'] = None
+            if 'mechanic' in row and row['mechanic'] == '':
+                row['mechanic'] = None
+
             exercise = Exercise(
-                id=row["id"],
-                name=row["name"],
-                force=row["force"],
-                level=row["level"],
-                mechanic=row["mechanic"],
-                equipment=row["equipment"],
-                primaryMuscles=row["primaryMuscles"],
-                secondaryMuscles=row["secondaryMuscles"],
-                instructions=row["instructions"],
-                category=row["category"],
-                images=row["images"],
-                )
+            name=row['name'],
+            force=row['force'],
+            level=row['level'],
+            mechanic=row['mechanic'],
+            equipment=row['equipment'],
+            primaryMuscles=row['primaryMuscles'],
+            secondaryMuscles=row['secondaryMuscles'],
+            instructions=row['instructions'],
+            category=row['category'],
+            images=row['images']
+            )
             db.session.add(exercise)
-        bob = User(username="bob", email="bob@mail.com", password="bobpass")
-        db.session.add(bob)
         db.session.commit()
