@@ -138,6 +138,12 @@
     width: 100%;
   }
 
+  .column-right-list {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+  }
+
   .card {
     max-width: 20em;
     max-height: 40em;
@@ -172,6 +178,39 @@
     padding-top: 1rem;
   }
 
+  .fav-card {
+    max-width: 20em;
+    max-height: 40em;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 2em;
+    box-shadow: 0px 0px 8em rgba(0, 0, 0, 0.7);
+  }
+  
+  .fav-card-image {
+    width: 100%;
+  }
+
+  .fav-card-content {
+    text-align: left;
+  }
+
+  .fav-card-content h1 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .fav-card-content {
+    font-size: 0.5rem;
+  }
+  
+  .card-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   ul {
     list-style-type: none;
   }
@@ -194,7 +233,7 @@
         {% endif %}
       </nav>
     </header>
-    <section class="body">
+    <!-- <section class="body"> -->
       <div class="body-container">
         {% if not current_user %}
           <div class="column-left">
@@ -208,33 +247,49 @@
             <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
           </div>
         {% else %}
-          <section class="body">
-              <div class="column-left">
-              {% for exercise in exercises %}
-              {% if exercise is none %}
-                  <h1>No exercises found</h1>
-              {% else %}
-                  <div class="card glass">
-                      <img src="{{ exercise.image }}" class="card-image">
-                      <div class="card-content">
-                          <h1 class="card-title">{{ exercise.name }}</h1>
-                          <ul>
-                              <li>Level: {{ exercise.level }}</li>
-                              <li>Equipment: {{ exercise.equipment }}</li>
-                              <li>Primary Muscles: {{ exercise.primaryMuscles }}</li>
-                              <li>Category: {{ exercise.category }}</li>
-                          </ul>
-                      </div>
-                      <div class="card-action">
-                          <a href="#"><button>This is a link</button></a>
-                      </div>
+          <!-- <section class="body"> -->
+            <div class="column-left">
+            {% for exercise in exercises %}
+            {% if exercise is none %}
+                <h1>No exercises found</h1>
+            {% else %}
+                <div class="card glass">
+                  <img src="{{ url_for('static', filename='fitnessWoman.png') }}" class="card-image">
+                  <div class="card-content">
+                      <h1 class="card-title">{{ exercise.name }}</h1>
+                      <ul>
+                          <li>Level: {{ exercise.level }}</li>
+                          <li>Equipment: {{ exercise.equipment }}</li>
+                          <li>Primary Muscles: {{ exercise.primaryMuscles }}</li>
+                          <li>Category: {{ exercise.category }}</li>
+                      </ul>
                   </div>
-              {% endif %}
-              {% endfor %}
+                  <div class="card-action">
+                      <a href="#"><button>This is a link</button></a>
+                  </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+            <div class="column-right-list">
+              <div class="fav-card glass">
+                <div class="fav-card-content">
+                    <h1 class="card-title">Exercise Name</h1>
+                    <ul>
+                      <li>Level: </li>
+                      <li>Equipment: </li>
+                      <li>Primary Muscles: </li>
+                      <li>Category: </li>
+                    </ul>
+                </div>
+                <div class="card-action">
+                    <a href="#"><button>This is a link</button></a>
+                </div>
               </div>
-          </section>
+            </div>
+          <!-- </section>  -->
         {% endif %}
-    </section>
+    <!-- </section> -->
   </main>
 </body>
 {% endblock %}
