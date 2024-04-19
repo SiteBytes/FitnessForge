@@ -157,11 +157,12 @@
   <main class="background">
     <header class="header">
       <nav>
-        <!-- <img class="logo" src="./SiteBytes Logo - Main.png"></img> -->
         <span class="logo">Fitness Forge</span>
+        {% if current_user %}
         <div class="nav-items">
           <a href="/logout">Log Out</a>
         </div>
+        {% endif %}
       </nav>
     </header>
     <section class="body">
@@ -171,7 +172,7 @@
             <div class="card glass">
               <h1>Make your body shape</h1>
               <p>Join Fitness Forge and get fit with our best-in-class Routines</p>
-              <a href="/login"><button>Sign Up</button></a>
+              <a href="/login"><button>Login or Sign Up</button></a>
             </div>
           </div>
           <div class="column-right">

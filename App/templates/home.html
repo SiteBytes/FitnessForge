@@ -16,6 +16,8 @@
     <ul>
         {% for exercise in exercises %}
             <li>{{ exercise.name }}</li>
+            <li>{{ exercise.description }}</li>
+            <li>{{ exercise.duration }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
