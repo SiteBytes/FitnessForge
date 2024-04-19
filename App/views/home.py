@@ -1,13 +1,11 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
-from flask_jwt_extended import jwt_required, current_user as jwt_current_user
+from flask_jwt_extended import jwt_required, current_user
 from sqlalchemy.exc import IntegrityError
 
-# from App.controllers import 
-# from App.database import db
-# from App.models import
+from App.database import db
 from datetime import datetime
-from App.controllers import get_all_exercises
-from App.models import Exercise
+from App.controllers import get_all_exercises, add_favorite, delete_favorite
+from App.models import Exercise, User, Favorite
 
 
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
@@ -17,3 +15,23 @@ home_views = Blueprint('home_views', __name__, template_folder='../templates')
 def home_page():
     exercises = Exercise.query.all()
     return render_template('home.html', exercises=exercises)
+
+@home_views.route('/add-favorite', methods=['POST'])
+@jwt_required()
+def add_favorite():
+    exercise_id = request.form['exercise_id']
+    exercise = Exercise.query.get(exercise_id)
+    if exercise is None:
+        flash('Exercise not found', 'error')
+        return redirect(url_for('home_views.home_page'))
+    try:
+        favorite = Favorite(exercise_id=exercise_id, user_id=current_user.id)
+        db.session.add(favorite)
+        db.session.commit()
+        flash('Favorite added', 'success')
+    except IntegrityError:
+        db.session.rollback()
+        flash('Favorite already added', 'error')
+    exercises = Exercise.query.all()
+    favorites = Favorite.query.filter_by(user_id=current_user.id).all()
+    return render_template('home.html', exercises=exercises, favorites=favorites)
