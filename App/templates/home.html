@@ -254,7 +254,7 @@
                 <h1>No exercises found</h1>
             {% else %}
                 <div class="card glass">
-                  <img src="{{ url_for('static', filename='fitnessWoman.png') }}" class="card-image">
+                  <img src="https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/{{ exercise.image1 }}" class="card-image">
                   <div class="card-content">
                       <h1 class="card-title">{{ exercise.name }}</h1>
                       <ul>
