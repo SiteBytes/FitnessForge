@@ -1,55 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fitness Forge</title>
-  <!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
-</head>
-
-<style>
-  * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
-
+  
   .background {
     background: linear-gradient(to left top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6)),
-      linear-gradient(to left bottom, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6));
+                linear-gradient(to left bottom, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6));
   }
-
+  
   .glass {
     background: linear-gradient(to top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.9));
     backdrop-filter: blur(5rem);
   }
-
+  
   body {
     background-color: #141000;
-    background-image: url('/static/topography.png');;
+    background-image: url('/static/topography.png');
     background-size: cover;
   }
-
+  
   header {
     background: rgba(20, 16, 0, 0.95);
     color: #141000;
-    backdrop-filter: blur(3px);
     margin: 1rem 1rem;
     border: none;
     border-radius: 2em;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
   }
-
+  
   main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
-
+  
   nav {
     display: flex;
     justify-content: space-between;
@@ -58,7 +43,7 @@
     max-height: 8vh;
     padding: 0rem calc((100vw - 1300px) / 2);
   }
-
+  
   .logo {
     color: #f5c000;
     font-size: 2rem;
@@ -67,7 +52,7 @@
     text-decoration: none;
     text-transform: uppercase;
   }
-
+  
   nav a {
     text-decoration: none;
     color: #141000;
@@ -80,11 +65,11 @@
     border-radius: 2em;
     padding: 0.5rem 1rem;
   }
-
+  
   nav a:hover {
     opacity: 0.7;
   }
-
+  
   .body-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,14 +78,14 @@
     border: none;
     border-radius: 2em;
   }
-
+  
   .card {
     padding: 2rem;
     border: none;
     border-radius: 2em;
     box-shadow: 0px 0px 8em rgba(0, 0, 0, 0.7);
   }
-
+  
   .column-left {
     display: flex;
     flex-direction: column;
@@ -109,20 +94,20 @@
     color: #141000;
     padding: 0rem 2rem;
   }
-
+  
   .column-left h1 {
     margin-bottom: 1rem;
     font-size: 4rem;
     text-transform: uppercase;
     font-weight: 1000;
   }
-
+  
   .column-left p {
     margin-bottom: 2rem;
     font-size: 1.2rem;
     line-height: 1.5;
   }
-
+  
   button {
     padding: 1rem 3rem;
     font-size: 1rem;
@@ -133,11 +118,11 @@
     cursor: pointer;
     transition: 0.3s;
   }
-
+  
   button:hover {
     opacity: 0.7;
   }
-
+  
   .column-right {
     display: flex;
     flex-direction: column;
@@ -145,48 +130,119 @@
     align-items: center;
     padding: 0rem 2rem;
   }
-
+  
   .column-right img {
     width: 100%;
   }
-
+  
   @media screen and (max-width: 768px) {
     .body-container {
       grid-template-columns: 1fr;
     }
   }
-</style>
 
-<body>
-  <main class="background">
-    <header class="header" id="myHeader">
-      <nav>
-        <span class="logo">Fitness Forge</span>
-        {% if current_user %}
-        <div class="nav-items">
-          <a href="/logout">Log Out</a>
-        </div>
-        {% endif %}
-      </nav>
-    </header>
-    <section class="body">
-      <div class="body-container">
-        {% if not current_user %}
-          <div class="column-left">
-            <div class="card glass">
-              <h1>Make your body shape</h1>
-              <p>Join Fitness Forge and get fit with our best-in-class Routines</p>
-              <a href="/login"><button>Sign In</button></a>
-            </div>
-          </div>
-          <div class="column-right">
-            <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
-          </div>
-        {% else %}
-        <div>you is logged in so the card hidden now, the list of exercises will go here</div>
-        {% endif %}
-    </section>
-  </main>
-</body> 
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100vh;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+  }
+  
+  .form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30% 20%;
+    border-radius: 2em;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 3em rgba(0, 0, 0, 0.15);
+    padding: 3em 5em;
+  }
+  
+  .form-image {
+    width: 75%;
+    padding-bottom: 1em;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .form-image:hover {
+    cursor: pointer;
+  }
+  
+  section h1 {
+    text-align: center;
+    padding-bottom: 1em;
+    font-size: 2rem;
+  }
+  
+  input[type=text], select {
+    width: 100%;
+    padding: 1em 5em;
+    margin: 0.5em 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 3em;
+    box-sizing: border-box;
+  }
 
-</html>
+  input[type=password], select {
+    width: 100%;
+    padding: 1em 5em;
+    margin: 0.5em 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 3em;
+    box-sizing: border-box;
+  }
+  
+  button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 2em;
+  }
+  
+  .column-left {
+    align-items: center;
+  }
+
+  .small-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.5rem;
+    border: none;
+    border-radius: 50px;
+    color: #f5c000;
+    background: #141000;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none; /* Removes the underline */
+    text-align: center; /* Centers the text */
+  }
+
+  .small-btn-container {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 1em;
+    justify-content: center;
+  }
