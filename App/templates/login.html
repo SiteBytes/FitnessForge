@@ -229,6 +229,7 @@
   }
 
   .small-btn {
+    display: inline-block;
     padding: 0.5rem 1rem;
     font-size: 0.5rem;
     border: none;
@@ -237,6 +238,15 @@
     background: #141000;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none; /* Removes the underline */
+    text-align: center; /* Centers the text */
+  }
+
+  .small-btn-container {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 1em;
+    justify-content: center;
   }
 </style>
 <body>
@@ -257,7 +267,9 @@
                 <input name="password" type="password" placeholder="Password">
               </div>
               <button type="submit">Login</button>
-              <a class="small-btn" href="/signup">Don't have an account? Sign Up</a>
+              <div class="small-btn-container">
+                <a class="small-btn" href="/signup">Don't have an account? Sign Up</a>
+              </div>
             </form>
           </div>
         </section>
