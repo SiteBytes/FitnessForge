@@ -19,7 +19,7 @@
   
   body {
     background-color: #141000;
-    background-image: url('/images/topography.png');
+    background-image: url('/static/topography.png');
     background-size: cover;
   }
   
@@ -207,6 +207,16 @@
     border-radius: 3em;
     box-sizing: border-box;
   }
+
+  input[type=password], select {
+    width: 100%;
+    padding: 1em 5em;
+    margin: 0.5em 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 3em;
+    box-sizing: border-box;
+  }
   
   button {
     display: block;
@@ -216,6 +226,27 @@
   
   .column-left {
     align-items: center;
+  }
+
+  .small-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.5rem;
+    border: none;
+    border-radius: 50px;
+    color: #f5c000;
+    background: #141000;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none; /* Removes the underline */
+    text-align: center; /* Centers the text */
+  }
+
+  .small-btn-container {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 1em;
+    justify-content: center;
   }
 </style>
 <body>
@@ -228,7 +259,7 @@
                 <img src="{{ url_for('static', filename='SiteBytes Logo - Main.png') }}" alt="SiteBytes logo" class="form-image">
             </a>
             <h1>Login</h1>
-            <form action="/login" method="POST"></form>
+            <form action="/login" method="POST">
               <div class="input-field">
                 <input name="username" type="text" placeholder="Username">
               </div>
@@ -236,6 +267,9 @@
                 <input name="password" type="password" placeholder="Password">
               </div>
               <button type="submit">Login</button>
+              <div class="small-btn-container">
+                <a class="small-btn" href="/signup">Don't have an account? Sign Up</a>
+              </div>
             </form>
           </div>
         </section>

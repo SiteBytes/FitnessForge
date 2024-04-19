@@ -5,7 +5,8 @@ from .index import index_views
 
 from App.controllers import (
     login,
-    create_user
+    create_user,
+    get_all_exercises
 )
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
@@ -14,24 +15,13 @@ auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 '''
 Page/Action Routes
 '''    
-# @auth_views.route('/users', methods=['GET'])
-# def get_user_page():
-#     users = get_all_users()
-#     return render_template('users.html', users=users)
-
-# @auth_views.route('/identify', methods=['GET'])
-# @jwt_required()
-# def identify_page():
-#     return render_template('message.html', title="Identify", message=f"You are logged in as {current_user.id} - {current_user.username}")
-    
-
 @auth_views.route('/login', methods=['POST'])
 def login_action():
     data = request.form
     token = login(data['username'], data['password'])
     if not token:
         flash('Bad username or password given'), 401
-        return redirect(url_for('login_views.login_page'))
+        return redirect(url_for('auth_views.login_page'))
     else:
         flash('Login Successful')
         response = redirect(url_for('home_views.home_page'))
@@ -49,13 +39,27 @@ def logout_action():
 def signup_action():
     data = request.form
     user = create_user(data['username'], data['password'])
-    response = redirect(url_for('login_views.login_page'))
+    response = redirect(url_for('auth_views.login_page'))
     if not user:
         flash('Problem Creating New Account'), 401
     else:
         flash('Sign Up Successful')
     return response
 
+
+@auth_views.route('/login', methods=['GET'])
+def login_page():
+    if not current_user:
+        return render_template('login.html')
+    else:
+        return redirect(url_for('home_views.home_page'))
+
+@auth_views.route('/signup', methods=['GET'])
+def signup_page():
+    if not current_user:
+        return render_template('signup.html')
+    else:
+        return redirect(url_for('home_views.home_page'))
 # '''
 # API Routes
 # '''

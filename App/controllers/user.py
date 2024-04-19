@@ -2,6 +2,9 @@ from App.models import User
 from App.database import db
 
 def create_user(username, password):
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user is not None:
+        return "User with this username already exists"
     newuser = User(username=username, password=password)
     db.session.add(newuser)
     db.session.commit()
