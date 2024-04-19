@@ -95,14 +95,14 @@
       <div class="column-right-list">
       {% for favorite in favorites %}
         <div class="fav-card glass">
-          <img src="./static/fitnessWoman.png" class="fav-card-image">
+          <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image">
           <div class="fav-card-content">
-            <h1 class="card-title">{{ favorite.name }}</h1>
+            <h1 class="card-title">{{ favorite.exercise.name }}</h1>
             <ul>
-              <li>Level: {{ favorite.level }}</li>
-              <li>Equipment: {{ favorite.equipment }}</li>
-              <li>Primary Muscles: {{ favorite.primaryMuscles }}</li>
-              <li>Category: {{ favorite.category }}</li>
+              <li>Level: {{ favorite.exercise.level }}</li>
+              <li>Equipment: {{ favorite.exercise.equipment }}</li>
+              <li>Primary Muscles: {{ favorite.exercise.primaryMuscles }}</li>
+              <li>Category: {{ favorite.exercise.category }}</li>
             </ul>
             <div class="card-action">
               <a href="#" class="small-btn">Remove from Favorites</a>

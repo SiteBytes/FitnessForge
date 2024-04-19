@@ -25,7 +25,7 @@ def add_favorite():
         flash('Exercise not found', 'error')
         return redirect(url_for('home_views.home_page'))
     try:
-        favorite = Favorite(exercise_id=exercise_id, user_id=current_user.id)
+        favorite = Favorite(exercise=exercise, user=current_user)
         db.session.add(favorite)
         db.session.commit()
         flash('Favorite added', 'success')
@@ -33,5 +33,5 @@ def add_favorite():
         db.session.rollback()
         flash('Favorite already added', 'error')
     exercises = Exercise.query.all()
-    favorites = Favorite.query.filter_by(user_id=current_user.id).all()
+    favorites = Favorite.query.filter_by(user=current_user).all()
     return render_template('home.html', exercises=exercises, favorites=favorites)
