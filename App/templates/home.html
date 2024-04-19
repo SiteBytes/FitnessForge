@@ -1,8 +1,15 @@
-{% extends "layout.html" %}
-{% block title %}Fitness Forge HOMEPAGE{% endblock %}
-{% block page %}Fitness Forge HOMEPAGE{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
-{{ super() }}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Forge</title>
+  <!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
+</head>
+
+
+
 
 {% block content %}
 <style>
@@ -173,47 +180,65 @@ button:hover {
   }
 }
 </style>
-
 <body>
   <main class="background">
     <header class="header">
       <nav>
         <span class="logo">Fitness Forge</span>
+        {% if current_user %}
         <div class="nav-items">
-          <a href="/home">Home</a>
+          <a href="/logout">Log Out</a>
         </div>
+        {% endif %}
       </nav>
     </header>
     <section class="body">
       <div class="body-container">
-        <div class="column-left">
-        
-        {% for exercise in exercises %}
-        {% if exercise is none %}
-            <h1>No exercises found</h1>
-        {% else %}
+        {% if not current_user %}
+          <div class="column-left">
             <div class="card glass">
-                <img src="{{ exercise.image }}" class="card-image">
-                <div class="card-content">
-                    <h1 class="card-title">{{ exercise.name }}</h1>
-                    <ul>
-                        <li>Level: {{ exercise.level }}</li>
-                        <li>Equipment: {{ exercise.equipment }}</li>
-                        <li>Primary Muscles: {{ exercise.primaryMuscles }}</li>
-                        <li>Category: {{ exercise.category }}</li>
-                    </ul>
-                </div>
-                <div class="card-action">
-                    <a href="#"><button>This is a link</button></a>
-                </div>
+              <h1>Make your body shape</h1>
+              <p>Join Fitness Forge and get fit with our best-in-class Routines</p>
+              <a href="/login"><button>Sign In</button></a>
             </div>
+          </div>
+          <div class="column-right">
+            <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
+          </div>
+        {% else %}
+        <div>you is logged in so the card hidden now, the list of exercises will go here</div>
+          <section class="body">
+            <div class="body-container">
+              <div class="column-left">
+              <p>ey boi</p>
+              {% for exercise in exercises %}
+              {% if exercise is none %}
+                  <h1>No exercises found</h1>
+              {% else %}
+                  <div class="card glass">
+                      <img src="{{ exercise.image }}" class="card-image">
+                      <div class="card-content">
+                          <h1 class="card-title">{{ exercise.name }}</h1>
+                          <ul>
+                              <li>Level: {{ exercise.level }}</li>
+                              <li>Equipment: {{ exercise.equipment }}</li>
+                              <li>Primary Muscles: {{ exercise.primaryMuscles }}</li>
+                              <li>Category: {{ exercise.category }}</li>
+                          </ul>
+                      </div>
+                      <div class="card-action">
+                          <a href="#"><button>This is a link</button></a>
+                      </div>
+                  </div>
+              {% endif %}
+              {% endfor %}
+              </div>
+              <div class="column-right">
+                  <!-- yadayadayada my favourites -->
+              </div>
+            </div>
+          </section>
         {% endif %}
-        {% endfor %}
-        </div>
-        <div class="column-right">
-            <!-- yadayadayada my favourites -->
-        </div>
-      </div>
     </section>
   </main>
 </body>
