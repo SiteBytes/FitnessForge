@@ -4,9 +4,6 @@ from flask import Blueprint, render_template, jsonify, request, send_from_direct
 
 
 def create_user(username, password):
-    existing_user = User.query.filter_by(username=username).first()
-    if existing_user is not None:
-        return "User with this username already exists"
     newuser = User(username=username, password=password)
     db.session.add(newuser)
     db.session.commit()
