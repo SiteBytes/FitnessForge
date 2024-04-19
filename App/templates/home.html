@@ -181,6 +181,7 @@
   }
 
   .fav-card {
+    display: flex;
     max-width: 20em;
     max-height: 40em;
     margin: 1rem;
@@ -191,7 +192,7 @@
   }
   
   .fav-card-image {
-    width: 100%;
+    width: 50%;
   }
 
   .fav-card-content {
@@ -222,6 +223,28 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .small-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.5rem;
+    border: none;
+    border-radius: 50px;
+    color: #f5c000;
+    background: #141000;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none; /* Removes the underline */
+    text-align: center; /* Centers the text */
+  }
+
+  .small-btn-container {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    justify-content: center;
+  }
+
 </style>
 <body>
   <main class="background">
@@ -235,7 +258,6 @@
         {% endif %}
       </nav>
     </header>
-    <!-- <section class="body"> -->
       <div class="body-container">
         {% if not current_user %}
           <div class="column-left">
@@ -249,7 +271,6 @@
             <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
           </div>
         {% else %}
-          <!-- <section class="body"> -->
             <div class="column-left">
             {% for exercise in exercises %}
             {% if exercise is none %}
@@ -275,6 +296,7 @@
             </div>
             <div class="column-right-list">
               <div class="fav-card glass">
+                <img src="./static/fitnessWoman.png" class="fav-card-image">
                 <div class="fav-card-content">
                     <h1 class="card-title">Exercise Name</h1>
                     <ul>
@@ -283,15 +305,14 @@
                       <li>Primary Muscles: </li>
                       <li>Category: </li>
                     </ul>
+                    <div class="card-action">
+                      <a href="#" class="small-btn">This is a link</a>
+                    </div>
                 </div>
-                <div class="card-action">
-                    <a href="#"><button>This is a link</button></a>
-                </div>
+                
               </div>
             </div>
-          <!-- </section>  -->
         {% endif %}
-    <!-- </section> -->
   </main>
 </body>
 {% endblock %}
