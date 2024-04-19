@@ -49,7 +49,7 @@
       </nav>
     </header>
     <div class="welcome body-container">
-      <h1>Welcome, {{ current_user.username }}</h1>
+      <h1>Welcome, {{ current_user.username }}, with user id: {{ current_user.id }}</h1>
     </div>
     <div class="heading-container">
       <h1>All Workouts</h1>
@@ -83,27 +83,33 @@
             </ul>
           </div>
           <div class="card-action">
-            <a href="#"><button>Add to Favorites</button></a>
+            <form action="/add-favorite" method="post" style="display: none;">
+              <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+              <input type="submit" value="Add to Favorites">
+            </form>
+            <button onclick="this.parentElement.querySelector('form').submit();">Add to Favorites</button>
           </div>
         </div>
         {% endfor %}
       </div>
       <div class="column-right-list">
+      {% for favorite in favorites %}
         <div class="fav-card glass">
           <img src="./static/fitnessWoman.png" class="fav-card-image">
           <div class="fav-card-content">
-            <h1 class="card-title">Exercise Name</h1>
+            <h1 class="card-title">{{ favorite.name }}</h1>
             <ul>
-              <li>Level: </li>
-              <li>Equipment: </li>
-              <li>Primary Muscles: </li>
-              <li>Category: </li>
+              <li>Level: {{ favorite.level }}</li>
+              <li>Equipment: {{ favorite.equipment }}</li>
+              <li>Primary Muscles: {{ favorite.primaryMuscles }}</li>
+              <li>Category: {{ favorite.category }}</li>
             </ul>
             <div class="card-action">
               <a href="#" class="small-btn">Remove from Favorites</a>
             </div>
           </div>
-
+        </div>
+        {% endfor %}
         </div>
       </div>
       {% endif %}
