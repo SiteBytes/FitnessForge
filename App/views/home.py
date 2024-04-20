@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, jsonify, request, send_from_direct
 from flask_jwt_extended import jwt_required, current_user
 from sqlalchemy.exc import IntegrityError
 
+from sqlalchemy import or_
+
 from App.database import db
 from datetime import datetime
 from App.controllers import get_all_exercises, add_favorite, delete_favorite
@@ -15,6 +17,13 @@ home_views = Blueprint('home_views', __name__, template_folder='../templates')
 def home_page():
     exercises = Exercise.query.all()
     return render_template('home.html', exercises=exercises)
+
+@home_views.route('/search', methods=['GET'])
+@jwt_required()
+def search():
+    query = request.args.get('query')
+    exercises = Exercise.query.filter(or_(Exercise.name.contains(query), Exercise.description.contains(query))).all()
+    return render_template('search_results.html', exercises=exercises)
 
 @home_views.route('/add-favorite', methods=['POST'])
 @jwt_required()

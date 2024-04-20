@@ -5,13 +5,16 @@
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
 
+  ::placeholder {
+    color: #141000;
+  }
+
   .background {
-    background: linear-gradient(to left top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6)),
-                linear-gradient(to left bottom, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6));
+    background: linear-gradient(to left top, rgba(245, 192, 0, 0.8), rgba(255, 192, 0, 0.8));
   }
 
   .glass {
-    background: linear-gradient(to top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.9));
+    background: linear-gradient(to top, rgba(245, 192, 0, 0.9), rgba(255, 192, 0, 0.9));
     backdrop-filter: blur(5rem);
   }
 
@@ -46,6 +49,29 @@
     min-height: 8vh;
     max-height: 8vh;
     padding: 0rem calc((100vw - 1300px) / 2);
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .wrapper a {
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .search {
+    border: none;
+    border-radius: 2em 0 0 2em;
+    padding: 0.6rem 1rem;
+    background-color: #f5c000;
+    text-decoration: none;
+    outline: none;
+    letter-spacing: 2px;
+    transition: 0.15s;
   }
 
   .logo {
@@ -185,16 +211,24 @@
     max-width: 20em;
     max-height: 40em;
     margin: 1rem;
+    margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
     padding: 0.5rem;
     border: none;
     border-radius: 2em;
     box-shadow: 0px 0px 8em rgba(0, 0, 0, 0.7);
+    transition: 0.3s;
+  }
+
+  .fav-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10em rgba(255, 192, 0, 1);
   }
   
   .fav-card-image {
-    width: 40%;
+    max-width: 110px;
+    max-height: 110px;
     border: none;
     border-radius: 2em;
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
@@ -242,6 +276,10 @@
     transition: 0.3s;
     text-decoration: none; /* Removes the underline */
     text-align: center; /* Centers the text */
+  }
+
+  .small-btn:hover {
+    opacity: 0.7;
   }
 
   .small-btn-container {
