@@ -52,12 +52,20 @@ def logout_action():
 def signup_action():
     data = request.form
     user = create_user(data['username'], data['password'])
-    response = redirect(url_for('auth_views.login_page'))
     if not user:
         flash('Problem Creating New Account'), 401
+        return redirect(url_for('auth_views.signup_page'))
     else:
         flash('Sign Up Successful')
-    return response
+        token = login(data['username'], data['password'])
+        if not token:
+            flash('Bad username or password given'), 401
+            return redirect(url_for('auth_views.login_page'))
+        else:
+            flash('Login Successful')
+            response = redirect(url_for('home_views.home_page'))
+            set_access_cookies(response, token) 
+            return response
 
 
 @auth_views.route('/login', methods=['GET'])
