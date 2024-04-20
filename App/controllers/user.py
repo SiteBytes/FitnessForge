@@ -44,7 +44,7 @@ def save_favorite(user_id, exercise_id):
     favorite = Favorite(user_id=user.id, exercise_id=exercise.id)
     db.session.add(favorite)
     db.session.commit()
-    return favorite.get_json()
+    return favorite.serialize()
 
 def delete_favorite(user_id, exercise_id):
     user = User.query.get(user_id)
@@ -58,4 +58,4 @@ def delete_favorite(user_id, exercise_id):
         return jsonify({'error': 'Favorite not found'}), 404
     db.session.delete(favorite)
     db.session.commit()
-    return favorite.get_json()
+    return favorite.serialize()
