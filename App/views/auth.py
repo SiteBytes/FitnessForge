@@ -39,14 +39,23 @@ def login_action():
     else:
         flash('Login Successful')
         set_access_cookies(response, token) 
-    return response
+        return response
 
-@auth_views.route('/logout', methods=['GET'])
-def logout_action():
-    response = redirect(request.referrer) 
-    flash("Logged Out!")
-    unset_jwt_cookies(response)
-    return response
+# @auth_views.route('/logout', methods=['GET'])
+# def logout_action():
+#     response = redirect(request.referrer) 
+#     flash("Logged Out!")
+#     unset_jwt_cookies(response)
+#     current_user = None
+#     return redirect(url_for('index_views.index_page'))
+
+# @auth_views.route('/logout', methods=['GET'])
+# def logout_action():
+#     response = redirect(request.referrer) 
+#     flash("Logged Out!")
+#     unset_jwt_cookies(response)
+#     current_user = None
+#     return redirect(url_for('index_views.index_page'))
 
 @auth_views.route('/signup', methods=['POST'])
 def signup_action():
@@ -100,32 +109,8 @@ def signup_page():
 # def identify_user():
 #     return jsonify({'message': f"username: {current_user.username}, id : {current_user.id}"})
 
-# @auth_views.route('/api/logout', methods=['GET'])
-# def logout_api():
-#     response = jsonify(message="Logged Out!")
-#     unset_jwt_cookies(response)
-#     return response
-'''
-API Routes
-'''
-
-@auth_views.route('/api/login', methods=['POST'])
-def user_login_api():
-  data = request.json
-  token = login(data['username'], data['password'])
-  if not token:
-    return jsonify(message='bad username or password given'), 401
-  response = jsonify(access_token=token) 
-  set_access_cookies(response, token)
-  return response
-
-@auth_views.route('/api/identify', methods=['GET'])
-@jwt_required()
-def identify_user():
-    return jsonify({'message': f"username: {current_user.username}, id : {current_user.id}"})
-
 @auth_views.route('/api/logout', methods=['GET'])
 def logout_api():
-    response = jsonify(message="Logged Out!")
+    response = redirect(url_for('index_views.index_page'))
     unset_jwt_cookies(response)
     return response

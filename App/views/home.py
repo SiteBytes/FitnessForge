@@ -24,7 +24,8 @@ def home_page():
 def search():
     query = request.args.get('query')
     exercises = Exercise.query.filter(or_(Exercise.name.contains(query), Exercise.instructions.contains(query))).all()
-    return render_template('home.html', exercises=exercises)
+    favorites = Favorite.query.filter_by(user_id=current_user.id).all()
+    return render_template('home.html', exercises=exercises, favorites=favorites)
 
 @home_views.route('/add-favorite', methods=['POST'])
 @jwt_required()
