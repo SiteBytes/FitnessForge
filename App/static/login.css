@@ -4,6 +4,10 @@
     padding: 0;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
+
+  ::placeholder {
+    color: #141000;
+  }
   
   .background {
     background: linear-gradient(to left top, rgba(245, 192, 0, 0.3), rgba(255, 192, 0, 0.6)),

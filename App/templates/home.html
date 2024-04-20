@@ -44,7 +44,7 @@
         {% if current_user %}
         <div>
           <form class="wrapper" action="/search" method="GET">
-            <input class="search" type="text" name="query" placeholder="Search for workouts">
+            <input class="search" type="text" name="query" placeholder="Search for exercises">
             <button type="submit">Search</button>
           </form>
         </div>
@@ -55,11 +55,12 @@
         {% endif %}
       </nav>
     </header>
-    <div class="welcome body-container">
-      <h1>Welcome, {{ current_user.username }}, with user id: {{ current_user.id }}</h1>
+    <div class="welcome welcome-container">
+      <h1>Welcome,</h1>
+      <h1 class="username">{{ current_user.username }}</h1>
     </div>
     <div class="heading-container">
-      <h1>All Workouts</h1>
+      <h1>All Exercises</h1>
       <h1>My Favorites</h1>
     </div>
     <div class="body-container">
@@ -112,10 +113,11 @@
               <li>Category: {{ favorite.exercise.category }}</li>
             </ul>
             <div class="card-action">
-              <form action="/delete-favorite" method="post">
+              <form action="/delete-favorite" method="post" style="display: none;">
                 <input type="hidden" name="exercise_id" value="{{ favorite.exercise.id }}">
                 <input type="submit" value="Remove from Favorites">
               </form>
+              <button onclick="this.parentElement.querySelector('form').submit();" class="small-btn">Remove from Favorites</button>
             </div>
           </div>
         </div>

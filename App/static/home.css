@@ -20,7 +20,7 @@
 
   body {
     background-color: #141000;
-    background-image: url('/static/topography.png');
+    background-image: url('./App/static/topography.png');
     background-size: cover;
   }
 
@@ -116,6 +116,13 @@
     border-radius: 2em;
   }
 
+  .welcome-container {
+    display: flex;
+    padding: 0rem calc((100vw - 1300px) / 2);
+    border: none;
+    border-radius: 2em;
+  }
+
   .column-left {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -149,7 +156,7 @@
   }
 
   button:hover {
-    opacity: 0.7;
+    background: #275d22;
   }
 
   .column-right {
@@ -195,12 +202,13 @@
   }
 
   .card-content {
-    text-align: center;
+    text-align: left;
   }
 
   .card-content h1 {
     font-size: 1.5rem;
     font-weight: bold;
+    text-align: center;
   }
 
   .card-content p {
@@ -287,7 +295,7 @@
   }
 
   .small-btn:hover {
-    opacity: 0.7;
+    background: #990000;
   }
 
   .small-btn-container {
@@ -304,6 +312,12 @@
 
   .welcome h1 {
     font-size: 5rem;
+  }
+
+  .username {
+    display: inline;
+    text-transform: uppercase;
+    padding-left: 2rem
   }
 
   .heading-container {
