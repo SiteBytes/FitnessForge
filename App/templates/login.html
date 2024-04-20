@@ -13,12 +13,12 @@
                 <img src="{{ url_for('static', filename='FitnessForgeLogo.png') }}" alt="SiteBytes logo" class="form-image">
             </a>
             <h1>Login</h1>
-            <form action="/login" method="POST">
+            <form action="/api/login" method="POST">
               <div class="input-field">
-                <input name="username" type="text" placeholder="Username">
+                <input name="username" type="text" placeholder="Username" required>
               </div>
               <div class="input-field">
-                <input name="password" type="password" placeholder="Password">
+                <input name="password" type="password" placeholder="Password" required>
               </div>
               <button type="submit">Login</button>
               <div class="small-btn-container">

@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, jsonify, request, flash, send_from_directory, flash, redirect, url_for
-from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies
+from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, set_access_cookies, unset_access_cookies, get_jwt_identity, verify_jwt_in_request
 
 from .index import index_views
+from flask_jwt_extended.exceptions import NoAuthorizationError
 
 from App.controllers import (
     login,
@@ -29,11 +30,11 @@ def identify_page():
     return render_template('message.html', title="Identify", message=f"You are logged in as {current_user.id} - {current_user.username}")
     
 
-@auth_views.route('/login', methods=['POST'])
+@auth_views.route('/api/login', methods=['POST'])
 def login_action():
     data = request.form
     token = login(data['username'], data['password'])
-    response = redirect(request.referrer)
+    response = redirect(url_for('home_views.home_page'))
     if not token:
         flash('Bad username or password given'), 401
     else:
@@ -79,10 +80,8 @@ def signup_action():
 
 @auth_views.route('/login', methods=['GET'])
 def login_page():
-    if not current_user:
-        return render_template('login.html')
-    else:
-        return redirect(url_for('home_views.home_page'))
+    return render_template('login.html')
+
 
 @auth_views.route('/signup', methods=['GET'])
 def signup_page():
@@ -113,4 +112,5 @@ def signup_page():
 def logout_api():
     response = redirect(url_for('index_views.index_page'))
     unset_jwt_cookies(response)
+    unset_access_cookies(response)
     return response
