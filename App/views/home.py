@@ -50,19 +50,20 @@ def add_favorite():
 def delete_favorite():
     exercise_id = request.form['exercise_id']
     favorite_exercise = Favorite.query.filter_by(exercise_id=exercise_id, user_id=current_user.id).first()
+    
     if favorite_exercise:
+        
         try:
-            db.session.delete(favorite)
+            db.session.delete(favorite_exercise)
             db.session.commit()
             flash('Favorite removed', 'successs')
+        
         except IntegrityError:
             db.session.rollback()
             flash ('Error removing favorite', 'error')
-    else:
-        flash('Favorite not found', 'error')
-
-    exercises= Exercise.query.all()
-    favorites= Favorite.query.filter_by(user_id=current_user.id).all()
-    return render_template('home.html', exercises=exercises, favorites=favorites)
+            flash('Favorite not found', 'error')
+        exercises= Exercise.query.all()
+        favorites= Favorite.query.filter_by(user_id=current_user.id).all()
+        return render_template('home.html', exercises=exercises, favorites=favorites)
 
 
