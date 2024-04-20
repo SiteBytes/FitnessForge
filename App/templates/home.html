@@ -42,10 +42,10 @@
       <nav>
         <span class="logo">Fitness Forge</span>
         {% if current_user %}
-        <div class="wrapper">
-          <form action="/search" method="GET">
+        <div>
+          <form class="wrapper" action="/search" method="GET">
             <input class="search" type="text" name="query" placeholder="Search for workouts">
-            <a type="submit">Search</a>
+            <button type="submit">Search</button>
           </form>
         </div>
         </div>

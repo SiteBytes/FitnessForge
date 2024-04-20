@@ -22,8 +22,8 @@ def home_page():
 @jwt_required()
 def search():
     query = request.args.get('query')
-    exercises = Exercise.query.filter(or_(Exercise.name.contains(query), Exercise.description.contains(query))).all()
-    return render_template('search_results.html', exercises=exercises)
+    exercises = Exercise.query.filter(or_(Exercise.name.contains(query), Exercise.instructions.contains(query))).all()
+    return render_template('home.html', exercises=exercises)
 
 @home_views.route('/add-favorite', methods=['POST'])
 @jwt_required()

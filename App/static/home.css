@@ -53,14 +53,22 @@
 
   .wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 
-  .wrapper a {
-    margin-left: 0;
+  .wrapper button {
+    margin: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    text-decoration: none;
+    color: #141000;
+    letter-spacing: 2px;
+    font-weight: bold;
+    transition: 0.3s;
+    background: #f5c000;
+    border: none;
+    padding: 0.5rem 1rem;
   }
 
   .search {
