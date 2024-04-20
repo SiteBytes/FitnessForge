@@ -101,7 +101,7 @@
       </div>
       <div class="column-right-list">
       {% for favorite in favorites %}
-        <div class="fav-card glass">
+        <div class="fav-card glass lazy">
           <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image">
           <div class="fav-card-content">
             <h1 class="card-title">{{ favorite.exercise.name }}</h1>
@@ -112,7 +112,10 @@
               <li>Category: {{ favorite.exercise.category }}</li>
             </ul>
             <div class="card-action">
-              <a href="#" class="small-btn">Remove from Favorites</a>
+              <form action="/delete-favorite" method="post">
+                <input type="hidden" name="exercise_id" value="{{ favorite.exercise.id }}">
+                <input type="submit" value="Remove from Favorites">
+              </form>
             </div>
           </div>
         </div>

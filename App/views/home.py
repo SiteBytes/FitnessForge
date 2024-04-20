@@ -52,7 +52,6 @@ def delete_favorite():
     favorite_exercise = Favorite.query.filter_by(exercise_id=exercise_id, user_id=current_user.id).first()
     
     if favorite_exercise:
-        
         try:
             db.session.delete(favorite_exercise)
             db.session.commit()
