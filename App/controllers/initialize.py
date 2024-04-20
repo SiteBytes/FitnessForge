@@ -7,7 +7,7 @@ import csv
 def initialize():
     db.drop_all()
     db.create_all()
-    with open('finalexercises.csv', newline='', encoding='utf8') as csvfile:
+    with open('./App/static/finalexercises.csv', newline='', encoding='utf8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             if 'equipment' in row and row['equipment'] == '':
