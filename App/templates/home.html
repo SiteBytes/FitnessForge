@@ -55,9 +55,8 @@
         {% endif %}
       </nav>
     </header>
-    <div class="welcome welcome-container">
-      <h1>Welcome,</h1>
-      <h1 class="username">{{ current_user.username }}</h1>
+    <div class="welcome body-container">
+      <h1>Welcome, {{ current_user.username }}</h1>
     </div>
     <div class="heading-container">
       <h1>All Exercises</h1>
@@ -91,13 +90,36 @@
             </ul>
           </div>
           <div class="card-action">
-            <form action="/add-favorite" method="post" style="display: none;">
+            <form id="add-favorite-form" action="/add-favorite" method="post" style="display: none;">
               <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
               <input type="submit" value="Add to Favorites">
             </form>
             <button onclick="this.parentElement.querySelector('form').submit();">Add to Favorites</button>
           </div>
         </div>
+        <script>
+          function submitForm(event) {
+            event.preventDefault(); // Prevent the form from being submitted normally
+          
+            var form = document.getElementById('add-favorite-form');
+            var formData = new FormData(form);
+          
+            fetch(form.action, {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the response here. You might want to update the page content
+              // based on the response, or show a success message to the user.
+              location.reload(); // Reload the page to show the updated content
+            })
+            .catch(error => {
+              // Handle the error here. You might want to show an error message to the user.
+              console.error('Error:', error);
+            });
+          }
+          </script>
         {% endfor %}
       </div>
       <div class="column-right-list">

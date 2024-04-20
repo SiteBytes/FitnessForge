@@ -11,7 +11,7 @@ class Favorite(db.Model):
             self.user_id = user.id
             self.exercise_id = exercise.id
 
-        def get_json(self):
+        def serialize(self):
             return {
                 'id': self.id,
                 'user': self.user,
