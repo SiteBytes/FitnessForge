@@ -13,6 +13,7 @@ from App.models import Exercise, User, Favorite
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
 
 @home_views.route('/home', methods=['GET'])
+@jwt_required()
 def home_page():
     exercises = Exercise.query.all()
     favorites = Favorite.query.all()
