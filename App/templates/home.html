@@ -55,8 +55,9 @@
         {% endif %}
       </nav>
     </header>
-    <div class="welcome body-container">
-      <h1>Welcome, {{ current_user.username }}</h1>
+    <div class="welcome welcome-container">
+      <h1>Welcome,</h1>
+      <h1 class="username">{{ current_user.username }}</h1>
     </div>
     <div class="heading-container">
       <h1>All Exercises</h1>
@@ -77,74 +78,71 @@
       {% else %}
       <div class="column-left">
         {% for exercise in exercises %}
-        <div class="card glass lazy">
-          <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ exercise.image1 }}" class="card-image"
-            loading="lazy">
-          <div class="card-content">
-            <h1 class="card-title">{{ exercise.name }}</h1>
-            <ul>
-              <li>Level: {{ exercise.level }}</li>
-              <li>Equipment: {{ exercise.equipment }}</li>
-              <li>Primary Muscles: {{ exercise.primaryMuscles }}</li>
-              <li>Category: {{ exercise.category }}</li>
-            </ul>
-          </div>
-          <div class="card-action">
-            <form id="add-favorite-form" action="/add-favorite" method="post" style="display: none;">
-              <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
-              <input type="submit" value="Add to Favorites">
-            </form>
-            <button onclick="this.parentElement.querySelector('form').submit();">Add to Favorites</button>
-          </div>
-        </div>
-        <script>
-          function submitForm(event) {
-            event.preventDefault(); // Prevent the form from being submitted normally
-          
-            var form = document.getElementById('add-favorite-form');
-            var formData = new FormData(form);
-          
-            fetch(form.action, {
-              method: 'POST',
-              body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-              // Handle the response here. You might want to update the page content
-              // based on the response, or show a success message to the user.
-              location.reload(); // Reload the page to show the updated content
-            })
-            .catch(error => {
-              // Handle the error here. You might want to show an error message to the user.
-              console.error('Error:', error);
-            });
-          }
-          </script>
-        {% endfor %}
-      </div>
-      <div class="column-right-list">
-      {% for favorite in favorites %}
-        <div class="fav-card glass lazy">
-          <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image">
-          <div class="fav-card-content">
-            <h1 class="card-title">{{ favorite.exercise.name }}</h1>
-            <ul>
-              <li>Level: {{ favorite.exercise.level }}</li>
-              <li>Equipment: {{ favorite.exercise.equipment }}</li>
-              <li>Primary Muscles: {{ favorite.exercise.primaryMuscles }}</li>
-              <li>Category: {{ favorite.exercise.category }}</li>
-            </ul>
-            <div class="card-action">
-              <form action="/delete-favorite" method="post" style="display: none;">
-                <input type="hidden" name="exercise_id" value="{{ favorite.exercise.id }}">
-                <input type="submit" value="Remove from Favorites">
-              </form>
-              <button onclick="this.parentElement.querySelector('form').submit();" class="small-btn">Remove from Favorites</button>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card glass lazy">
+                <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ exercise.image1 }}" class="card-image"
+                  loading="lazy">
+                <div class="card-content">
+                  <h1 class="card-title">{{ exercise.name }}</h1>
+                  <ul>
+                    <li>Level: {{ exercise.level }}</li>
+                    <li>Equipment: {{ exercise.equipment }}</li>
+                    <li>Primary Muscles: {{ exercise.primaryMuscles }}</li>
+                    <li>Category: {{ exercise.category }}</li>
+                  </ul>
+                </div>
+                <div class="card-action">
+                  <form action="/add-favorite" method="post" style="display: none;">
+                    <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+                    <input type="submit" value="Add to Favorites">
+                  </form>
+                  <button onclick="this.parentElement.querySelector('form').submit();">Add to Favorites</button>
+                </div>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="card glass lazy">
+                <div class="card-content">
+                  <h1 class="card-title">{{ exercise.name }}</h1>
+                  <p>{{ exercise.instructions }}</p>
+                </div>
+                <div class="card-action">
+                  <form action="/add-favorite" method="post" style="display: none;">
+                    <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+                    <input type="submit" value="Add to Favorites">
+                  </form>
+                  <button onclick="this.parentElement.querySelector('form').submit();">Add to Favorites</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         {% endfor %}
-        </div>
+      </div>
+      <div class="column-right-list">
+        {% for favorite in favorites %}
+          <div class="fav-card glass lazy">
+            <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image">
+            <div class="fav-card-content">
+              <h1 class="card-title">{{ favorite.exercise.name }}</h1>
+              <ul>
+                <li>Level: {{ favorite.exercise.level }}</li>
+                <li>Equipment: {{ favorite.exercise.equipment }}</li>
+                <li>Primary Muscles: {{ favorite.exercise.primaryMuscles }}</li>
+                <li>Category: {{ favorite.exercise.category }}</li>
+              </ul>
+              <div class="card-action">
+                <form action="/delete-favorite" method="post" style="display: none;">
+                  <input type="hidden" name="exercise_id" value="{{ favorite.exercise.id }}">
+                  <input type="submit" value="Remove from Favorites">
+                </form>
+                <button onclick="this.parentElement.querySelector('form').submit();" class="small-btn">Remove from Favorites</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       </div>
       {% endif %}
   </main>
