@@ -20,8 +20,9 @@
 
   body {
     background-color: #141000;
-    background-image: url('./App/static/topography.png');
-    background-size: cover;
+    background-image: url('/static/topography.png');
+    background-size: 100%;
+    background-repeat: repeat;
   }
 
   header {
