@@ -152,7 +152,6 @@
     background: #141000;
     cursor: pointer;
     transition: 0.3s;
-    margin-bottom: 2em;
   }
 
   button:hover {
@@ -178,8 +177,12 @@
   }
 
   .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     max-width: 20em;
     max-height: 40em;
+    min-height: 28em;
     margin: 1rem;
     padding: 0.5rem;
     border: none;
@@ -231,7 +234,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 1rem;
+    padding-bottom: 1em;
   }
 
   .fav-card {
@@ -360,6 +363,8 @@
     background-color: transparent;
     width: 20em;
     height: 28em;
+    min-height: 28em;
+    margin-bottom: 2rem;
     perspective: 1000px;
   }
   
