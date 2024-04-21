@@ -85,10 +85,7 @@ def login_page():
 
 @auth_views.route('/signup', methods=['GET'])
 def signup_page():
-    if not current_user:
-        return render_template('signup.html')
-    else:
-        return redirect(url_for('home_views.home_page'))
+    return render_template('signup.html')
 # '''
 # API Routes
 # '''
