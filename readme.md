@@ -4,6 +4,7 @@
 </a>
 
 ![Tests](https://github.com/uwidcit/flaskmvc/actions/workflows/dev.yml/badge.svg)
+[![codecov](https://codecov.io/gh/SiteBytes/FitnessForge/graph/badge.svg?token=315X0T4BT9)](https://codecov.io/gh/SiteBytes/FitnessForge)
 
 # Flask MVC Template
 A template for flask applications structured in the Model View Controller pattern [Demo](https://dcit-flaskmvc.herokuapp.com/). [Postman Collection](https://documenter.getpostman.com/view/583570/2s83zcTnEJ)
