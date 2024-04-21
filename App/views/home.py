@@ -34,7 +34,8 @@ def search():
     query = request.args.get('query')
     exercises = Exercise.query.filter(or_(Exercise.name.contains(query), Exercise.instructions.contains(query))).all()
     favorites = Favorite.query.filter_by(user_id=current_user.id).all()
-    return render_template('home.html', exercises=exercises, favorites=favorites)
+    imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
+    return render_template('home.html', exercises=exercises, favorites=favorites, imagekit_url_endpoint=imagekit_url_endpoint)
 
 @home_views.route('/add-favorite', methods=['POST'])
 @jwt_required()
