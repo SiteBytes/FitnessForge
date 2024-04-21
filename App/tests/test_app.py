@@ -1,9 +1,9 @@
-import os, tempfile, pytest, logging, unittest
+import os, tempfile, pytest, logging, unittest, json
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import db, create_db
-from App.models import User
+from App.models import User, Exercise, Favorite
 from App.controllers import (
     create_user,
     get_all_users_json,
@@ -42,6 +42,38 @@ class UserUnitTests(unittest.TestCase):
         user = User("bob", password)
         assert user.check_password(password)
 
+class TestFavoriteModel:
+    @pytest.fixture(autouse=True)
+    def setup_and_teardown(self, empty_db):
+        self.client = empty_db
+        self.user = User("bobby", "bobpass")
+        self.exercise = Exercise(id=999, name="test-exercise", category="strength", force="pull", level="beginner", mechanic="isolation", equipment="machine", primaryMuscles="abdominals", secondaryMuscles="obliques", instructions="Sit down on the ab crunch machine and select a weight you are comfortable with.", image1="Crunches-1.png", image2="Crunches-2.png)")
+        db.session.add(self.user)
+        db.session.add(self.exercise)
+        db.session.commit()
+
+        yield  # This is where the testing happens
+
+        Favorite.query.delete()
+        User.query.delete()
+        Exercise.query.delete()
+        db.session.commit()
+
+    def test_favorite_creation(self):
+        favorite = Favorite(self.user, self.exercise)
+        db.session.add(favorite)
+        db.session.commit()
+        assert favorite.user_id == self.user.id
+        assert favorite.exercise_id == self.exercise.id
+
+    def test_favorite_serialization(self):
+        favorite = Favorite(self.user, self.exercise)
+        db.session.add(favorite)
+        db.session.commit()
+        serialized = favorite.serialize()
+        assert serialized['id'] == favorite.id
+        assert serialized['user'] == favorite.user
+        assert serialized['exercise'] == favorite.exercise
 '''
     Integration Tests
 '''
