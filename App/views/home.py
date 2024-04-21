@@ -16,7 +16,7 @@ home_views = Blueprint('home_views', __name__, template_folder='../templates')
 @jwt_required()
 def home_page():
     exercises = Exercise.query.all()
-    favorites = Favorite.query.all()
+    favorites = Favorite.query.filter_by(user=current_user).all()
     return render_template('home.html', exercises=exercises, favorites=favorites)
 
 @home_views.route('/search', methods=['GET'])
