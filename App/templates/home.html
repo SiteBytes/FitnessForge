@@ -71,8 +71,7 @@
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="card glass lazy">
-                <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ exercise.image1 }}" class="card-image"
-                  loading="lazy">
+                <img src="{{ imagekit_url_endpoint }}/tr:n-fit_the_card/{{ exercise.image1 }}" class="card-image" loading="lazy">
                 <div class="card-content">
                   <h1 class="card-title">{{ exercise.name }}</h1>
                   <ul>
@@ -113,7 +112,7 @@
       <div class="column-right-list">
         {% for favorite in favorites %}
           <div class="fav-card glass lazy">
-            <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image">
+            <img src="{{ imagekit_url_endpoint }}/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image" loading="lazy">
             <div class="fav-card-content">
               <h1 class="card-title">{{ favorite.exercise.name }}</h1>
               <ul>

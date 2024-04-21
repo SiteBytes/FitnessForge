@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user
 from sqlalchemy.exc import IntegrityError
+import os
 
 from sqlalchemy import or_
 
@@ -17,7 +18,8 @@ home_views = Blueprint('home_views', __name__, template_folder='../templates')
 def home_page():
     exercises = Exercise.query.all()
     favorites = Favorite.query.all()
-    return render_template('home.html', exercises=exercises, favorites=favorites)
+    imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
+    return render_template('home.html', exercises=exercises, favorites=favorites, imagekit_url_endpoint=imagekit_url_endpoint)
 
 @home_views.route('/search', methods=['GET'])
 @jwt_required()
