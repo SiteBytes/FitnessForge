@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
+from flask import Blueprint, render_template, jsonify, request, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user
 from sqlalchemy.exc import IntegrityError
 import os
@@ -6,9 +6,8 @@ import os
 from sqlalchemy import or_
 
 from App.database import db
-from datetime import datetime
 from App.controllers import get_all_exercises, add_favorite, delete_favorite
-from App.models import Exercise, User, Favorite
+from App.models import Exercise, Favorite
 
 
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
