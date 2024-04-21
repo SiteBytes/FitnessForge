@@ -11,31 +11,21 @@
 
 {% block content %}
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-      var lazyCards = [].slice.call(document.querySelectorAll(".lazy"));
-
-      if ("IntersectionObserver" in window) {
-          let lazyCardObserver = new IntersectionObserver(function(entries, observer) {
-              entries.forEach(function(entry) {
-                  if (entry.isIntersecting) {
-                    let lazyCard = entry.target;
-                    lazyCard.classList.add("fade-in");  // Add a class to trigger a CSS animation
-                    lazyCardObserver.unobserve(lazyCard);
-                  }
-              });
-          });
-
-          lazyCards.forEach(function(lazyCard) {
-              lazyCardObserver.observe(lazyCard);
-          });
-      } else {
-          // Fallback for browsers that don't support IntersectionObserver
-          lazyCards.forEach(function(lazyCard) {
-              // Add your code to load card content here
-              lazyCard.classList.remove("lazy");
-          });
-      }
-  });
+let page = 2;  // Start from the second page
+window.onscroll = function() {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    fetch(`/home?page=${page}`)
+      .then(response => response.text())
+      .then(data => {
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(data, 'text/html');
+        let newCards = doc.querySelectorAll('.flip-card');
+        let container = document.querySelector('.column-left');
+        newCards.forEach(card => container.appendChild(card));
+        page++;
+      });
+  }
+};
 </script>
 <body>
   <main class="background">
@@ -67,12 +57,11 @@
       
       <div class="column-left">
         {% for exercise in exercises %}
-        <div class="flip-card">
+        <div class="flip-card" id="exercise-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="card glass lazy">
-                <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ exercise.image1 }}" class="card-image"
-                  loading="lazy">
+                <img src="{{ imagekit_url_endpoint }}/tr:n-fit_the_card/{{ exercise.image1 }}" class="card-image" loading="lazy">
                 <div class="card-content">
                   <h1 class="card-title">{{ exercise.name }}</h1>
                   <ul>
@@ -113,7 +102,7 @@
       <div class="column-right-list">
         {% for favorite in favorites %}
           <div class="fav-card glass lazy">
-            <img src="https://ik.imagekit.io/wrzqaga55/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image">
+            <img src="{{ imagekit_url_endpoint }}/tr:n-fit_the_card/{{ favorite.exercise.image1 }}" class="fav-card-image" loading="lazy">
             <div class="fav-card-content">
               <h1 class="card-title">{{ favorite.exercise.name }}</h1>
               <ul>

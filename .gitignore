@@ -155,3 +155,4 @@ cython_debug/
 
 node_modules/
 .gitconfig
+App/.env

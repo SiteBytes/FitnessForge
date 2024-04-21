@@ -1,14 +1,12 @@
 import os
+from imagekitio import ImageKit
+from dotenv import load_dotenv
+
 from flask import Flask, render_template
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
-from werkzeug.datastructures import  FileStorage
-
-
 from App.database import init_db
 from App.config import load_config
-
 
 from App.controllers import (
     setup_jwt,
@@ -22,6 +20,12 @@ def add_views(app):
         app.register_blueprint(view)
 
 def create_app(overrides={}):
+    load_dotenv()
+    imagekit = ImageKit(
+        private_key = os.getenv('IMAGEKIT_PRIVATE_KEY'),
+        public_key = os.getenv('IMAGEKIT_PUBLIC_KEY'),
+        url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
+    )
     app = Flask(__name__, static_url_path='/static')
     load_config(app, overrides)
     CORS(app)
