@@ -13,7 +13,7 @@ pytest==7.0.1
 python-dotenv==0.21.1
 Flask-JWT-Extended==4.4.4
 Flask-Migrate==3.1.0
-Werkzeug==2.2.3
+Werkzeug==2.3.8
 gevent==23.9.0
 mysqlclient==2.1.1
 Flask-Admin==1.6.1
