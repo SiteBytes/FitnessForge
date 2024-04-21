@@ -18,3 +18,4 @@ gevent==23.9.0
 mysqlclient==2.1.1
 Flask-Admin==1.6.1
 imagekitio
+pytest-cov==3.0.0
