@@ -13,11 +13,19 @@ from App.models import Exercise, User, Favorite
 
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
 
-@home_views.route('/home', methods=['GET'])
+# @home_views.route('/home', methods=['GET'])
+# @jwt_required()
+# def home_page():
+#     exercises = Exercise.query.all()
+#     favorites = Favorite.query.filter_by(user=current_user).all()
+#     imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
+#     return render_template('home.html', exercises=exercises, favorites=favorites, imagekit_url_endpoint=imagekit_url_endpoint)
+@home_views.route('/home')
 @jwt_required()
 def home_page():
-    exercises = Exercise.query.all()
-    favorites = Favorite.query.all()
+    page = request.args.get('page', 1, type=int)
+    exercises = Exercise.query.paginate(page=page, per_page=10, error_out=False).items
+    favorites = Favorite.query.filter_by(user=current_user).all()
     imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
     return render_template('home.html', exercises=exercises, favorites=favorites, imagekit_url_endpoint=imagekit_url_endpoint)
 
@@ -70,3 +78,10 @@ def delete_favorite():
         return redirect(url_for('home_views.home_page'))
 
 
+@home_views.route('/api/exercises', methods=['GET'])
+@jwt_required()
+def get_exercises():
+    page = request.args.get('page', 1, type=int)
+    PER_PAGE = 10
+    exercises = Exercise.query.paginate(page, PER_PAGE, False).items
+    return jsonify([exercise.serialize() for exercise in exercises])
