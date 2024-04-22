@@ -11,7 +11,7 @@ from App.models import Exercise, Favorite
 
 
 home_views = Blueprint('home_views', __name__, template_folder='../templates')
-
+imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
 # @home_views.route('/home', methods=['GET'])
 # @jwt_required()
 # def home_page():
@@ -25,7 +25,6 @@ def home_page():
     page = request.args.get('page', 1, type=int)
     exercises = Exercise.query.paginate(page=page, per_page=10, error_out=False).items
     favorites = Favorite.query.filter_by(user=current_user).all()
-    imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
     return render_template('home.html', exercises=exercises, favorites=favorites, imagekit_url_endpoint=imagekit_url_endpoint)
 
 @home_views.route('/search', methods=['GET'])
@@ -34,7 +33,6 @@ def search():
     query = request.args.get('query')
     exercises = Exercise.query.filter(or_(Exercise.name.contains(query), Exercise.instructions.contains(query))).all()
     favorites = Favorite.query.filter_by(user_id=current_user.id).all()
-    imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
     return render_template('home.html', exercises=exercises, favorites=favorites, imagekit_url_endpoint=imagekit_url_endpoint)
 
 @home_views.route('/add-favorite', methods=['POST'])

@@ -1,5 +1,4 @@
 import os
-from imagekitio import ImageKit
 from dotenv import load_dotenv
 import sentry_sdk
 
@@ -22,18 +21,11 @@ def add_views(app):
 
 def create_app(overrides={}):
     load_dotenv()
-    imagekit = ImageKit(
-        private_key = os.getenv('IMAGEKIT_PRIVATE_KEY'),
-        public_key = os.getenv('IMAGEKIT_PUBLIC_KEY'),
-        url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
-    )
-    
     sentry_sdk.init(
         dsn=os.getenv('SENTRY_DSN'),
         traces_sample_rate=0.9,
         profiles_sample_rate=0.9
     )
-    
     app = Flask(__name__, static_url_path='/static')
     load_config(app, overrides)
     CORS(app)
