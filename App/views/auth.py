@@ -29,7 +29,7 @@ def login_action():
     data = request.form
     token = login(data['username'], data['password'])
     if not token:
-        return jsonify(error='Bad username or password given'), 401
+        return render_template('login.html', error='Bad username or password given')
     else:
         response = redirect(url_for('home_views.home_page'))
         flash('Login Successful')
