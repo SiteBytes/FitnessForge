@@ -1,6 +1,7 @@
 import os
 from imagekitio import ImageKit
 from dotenv import load_dotenv
+import sentry_sdk
 
 from flask import Flask, render_template
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
@@ -12,8 +13,8 @@ from App.controllers import (
     setup_jwt,
     add_auth_context
 )
-
 from App.views import views, setup_admin
+
 
 def add_views(app):
     for view in views:
@@ -26,6 +27,13 @@ def create_app(overrides={}):
         public_key = os.getenv('IMAGEKIT_PUBLIC_KEY'),
         url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
     )
+    
+    sentry_sdk.init(
+        dsn=os.getenv('SENTRY_DSN'),
+        traces_sample_rate=0.9,
+        profiles_sample_rate=0.9
+    )
+    
     app = Flask(__name__, static_url_path='/static')
     load_config(app, overrides)
     CORS(app)
