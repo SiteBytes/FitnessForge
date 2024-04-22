@@ -26,6 +26,7 @@ def create_app(overrides={}):
         traces_sample_rate=0.9,
         profiles_sample_rate=0.9
     )
+    imagekit_url_endpoint = os.getenv('IMAGEKIT_URL_ENDPOINT')
     app = Flask(__name__, static_url_path='/static')
     load_config(app, overrides)
     CORS(app)
