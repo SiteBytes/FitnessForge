@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/SiteBytes/FitnessForge/graph/badge.svg?token=315X0T4BT9)](https://codecov.io/gh/SiteBytes/FitnessForge)
 
 ### Fitness Forge
-Fitness Forge, developed by SiteBites Ltd., is a groundbreaking workout remixer application designed to address common challenges in the fitness realm. Leveraging extensive research and our team's collective experience in fitness, we understand the obstacles encountered by fitness enthusiasts worldwide. Consequently, Fitness Forge sets out to revolutionize the fitness landscape. 
+Fitness Forge, developed by SiteBytes Ltd., is a groundbreaking workout remixer application designed to address common challenges in the fitness realm. Leveraging extensive research and our team's collective experience in fitness, we understand the obstacles encountered by fitness enthusiasts worldwide. Consequently, Fitness Forge sets out to revolutionize the fitness landscape. 
 In today's dynamic world, adhering to a consistent fitness regimen can prove to be an overwhelming task. Many struggle with the monotony of repetitive exercises, devising effective routines, maintaining structure, and tracking progress. With Fitness Forge, we're committed to making fitness accessible and enjoyable for all!
 
 
