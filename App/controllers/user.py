@@ -3,11 +3,20 @@ from App.database import db
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 
 
+# def create_user(username, password):
+#     newuser = User(username=username, password=password)
+#     db.session.add(newuser)
+#     db.session.commit()
+#     return newuser
 def create_user(username, password):
-    newuser = User(username=username, password=password)
-    db.session.add(newuser)
-    db.session.commit()
-    return newuser
+    existing_user = get_user_by_username(username)
+    if existing_user:
+        raise ValueError("Username already exists")
+    else:
+        user = User(username=username, password=password)
+        db.session.add(user)
+        db.session.commit()
+        return user
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
