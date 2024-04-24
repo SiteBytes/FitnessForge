@@ -154,5 +154,4 @@ cython_debug/
 #.idea/
 
 node_modules/
-.gitconfig
 App/.env
