@@ -4,7 +4,7 @@ Flask-Cors==6.0.5
 Flask-SQLAlchemy==3.0.3
 greenlet==2.0.2
 gunicorn==22.0.0
-itsdangerous==2.1.2
+itsdangerous==2.2.0
 python-dotenv==1.2.3
 Flask-Migrate==3.1.0
 Flask-Reuploaded==1.6.0
