@@ -168,7 +168,6 @@
     width: 100%;
   }
 
-  /* Archived Notice Modal Styles */
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -257,6 +256,8 @@
   .modal-footer {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 1.25rem;
   }
@@ -287,6 +288,7 @@
     cursor: pointer;
     font-size: 0.9rem;
     transition: 0.2s;
+    text-decoration: none;
   }
 
   .btn-modal-secondary:hover {
@@ -302,7 +304,6 @@
 </style>
 
 <body>
-  <!-- Archived Project Notice Modal -->
   <div id="archived-modal" class="modal-overlay" style="display: none;">
     <div class="modal-card">
       <div class="modal-header">
@@ -311,20 +312,21 @@
       </div>
       <div class="modal-body">
         <p>
-          Fitness Forge is an archived school project. The cloud PostgreSQL instance has been retired, and the service now runs using its built-in local SQLite database.
+          Fitness Forge is an archived school project. The cloud PostgreSQL instance has been retired, and the app runs on its built-in local SQLite database.
         </p>
         <p>
-          You can explore the exercise catalog and favorites system using the pre-seeded demo user:
+          Explore the workout catalog and favorites system using the pre-seeded demo account:
         </p>
         <div class="demo-creds-box">
           <p>🔑 <strong>Demo Credentials:</strong></p>
           <p>Username: <code>bob</code> &nbsp;|&nbsp; Password: <code>bobpass</code></p>
         </div>
-        <p style="font-size: 0.85rem; color: #aaa;">
-          <em>Note: Changes and new accounts are kept in local storage and reset when the server spins down.</em>
+        <p style="font-size: 0.85rem; color: #bbb;">
+          Repository source code: <a href="https://github.com/SiteBytes/FitnessForge" target="_blank" rel="noopener noreferrer" style="color: #f5c000; text-decoration: underline;">SiteBytes/FitnessForge</a>
         </p>
       </div>
       <div class="modal-footer">
+        <a href="https://github.com/SiteBytes/FitnessForge" target="_blank" rel="noopener noreferrer" class="btn-modal-secondary">GitHub</a>
         <button type="button" class="btn-modal-secondary" onclick="dismissArchivedModal()">Dismiss</button>
         <a href="/login" class="btn-modal-primary">Sign In as Bob</a>
       </div>
