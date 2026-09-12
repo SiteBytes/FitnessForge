@@ -9,18 +9,27 @@
       <div class="form-container">
         <section class="form">
           <div class="form-content glass">
-            <a href="https://fitnessforge.onrender.com">
+            <a href="/">
                 <img src="{{ url_for('static', filename='FitnessForgeLogo.png') }}" alt="Fitness Forge logo" class="form-image">
             </a>
             <h1>Sign Up</h1>
+
+            <div style="background: rgba(245, 192, 0, 0.12); border: 1px dashed rgba(245, 192, 0, 0.5); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.2rem; text-align: center; color: #fff; font-size: 0.85rem;">
+              <span style="color: #f5c000; font-weight: bold;">📦 Archived Demo Notice:</span><br>
+              New accounts are stored in local SQLite and remain active while the server is running.
+            </div>
+
             <form action="/signup" method="POST">
               <div class="input-field">
-                <input name="username" type="text" placeholder="Username">
+                <input name="username" type="text" placeholder="Username" required>
               </div>
               <div class="input-field">
-                <input name="password" type="password" placeholder="Password">
+                <input name="password" type="password" placeholder="Password" required>
               </div>
               <button type="submit">Sign Up</button>
+              <div class="small-btn-container" style="margin-top: 1rem;">
+                <a class="small-btn" href="/login" style="color: #141000; font-size: 0.9rem;">Already have an account? Sign In</a>
+              </div>
             </form>
           </div>
         </section>
@@ -29,3 +38,4 @@
   </main>
 </body>
 {% endblock %}
+

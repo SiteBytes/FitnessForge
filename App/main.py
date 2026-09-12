@@ -42,4 +42,13 @@ def create_app(overrides={}):
     def custom_unauthorized_response(error):
         return render_template('401.html', error=error), 401
     app.app_context().push()
+
+    if not app.config.get('TESTING'):
+        try:
+            from App.controllers.initialize import ensure_db_initialized
+            ensure_db_initialized()
+        except Exception as e:
+            app.logger.warning(f"Database auto-initialization skipped or encountered an error: {e}")
+
     return app
+

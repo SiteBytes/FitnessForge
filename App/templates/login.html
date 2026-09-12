@@ -9,16 +9,22 @@
       <div class="form-container">
         <section class="form">
           <div class="form-content glass">
-            <a href="https://fitnessforge.onrender.com">
+            <a href="/">
                 <img src="{{ url_for('static', filename='FitnessForgeLogo.png') }}" alt="Fitness Forge logo" class="form-image">
             </a>
             <h1>Login</h1>
+            
+            <div style="background: rgba(245, 192, 0, 0.12); border: 1px dashed rgba(245, 192, 0, 0.5); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.2rem; text-align: center; color: #fff; font-size: 0.9rem;">
+              <span style="color: #f5c000; font-weight: bold;">📦 Archived Demo Account</span><br>
+              Username: <code style="background: #000; color: #f5c000; padding: 2px 6px; border-radius: 4px;">bob</code> &nbsp;|&nbsp; Password: <code style="background: #000; color: #f5c000; padding: 2px 6px; border-radius: 4px;">bobpass</code>
+            </div>
+
             <form action="/api/login" method="POST">
               <div class="input-field">
-                <input name="username" type="text" placeholder="Username" required>
+                <input name="username" type="text" placeholder="Username" value="bob" required>
               </div>
               <div class="input-field">
-                <input name="password" type="password" placeholder="Password" required>
+                <input name="password" type="password" placeholder="Password" value="bobpass" required>
               </div>
               <button type="submit">Login</button>
               <div class="small-btn-container">
@@ -37,3 +43,4 @@
   {% endif %}
 </body>
 {% endblock %}
+

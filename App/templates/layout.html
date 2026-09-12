@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fitness Forge</title>
-  <!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
   <link rel="icon" href="{{ url_for('static', filename='FitnessForge_logo_black.png') }}">
-
 </head>
 
 <style>
@@ -30,7 +28,7 @@
 
   body {
     background-color: #141000;
-    background-image: url('/static/topography.png');;
+    background-image: url('/static/topography.png');
     background-size: cover;
   }
 
@@ -61,12 +59,30 @@
     padding: 0rem calc((100vw - 1300px) / 2);
   }
 
+  .logo-group {
+    display: flex;
+    align-items: center;
+  }
+
   .logo {
     color: #f5c000;
     font-size: 2rem;
     letter-spacing: 5px;
     font-weight: bold;
     text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .archived-badge {
+    display: inline-block;
+    background: rgba(245, 192, 0, 0.15);
+    color: #f5c000;
+    border: 1px solid rgba(245, 192, 0, 0.4);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 1rem;
+    margin-left: 1rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
   }
 
@@ -152,6 +168,132 @@
     width: 100%;
   }
 
+  /* Archived Notice Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 1rem;
+  }
+
+  .modal-card {
+    background: #181404;
+    border: 2px solid #f5c000;
+    border-radius: 1.5rem;
+    max-width: 520px;
+    width: 100%;
+    padding: 2rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+    color: #f8f8f8;
+    animation: modalFadeIn 0.25s ease-out;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-15px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-header {
+    margin-bottom: 1rem;
+  }
+
+  .modal-tag {
+    display: inline-block;
+    color: #141000;
+    background: #f5c000;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-header h2 {
+    color: #f5c000;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .modal-body p {
+    color: #e2e2e2;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+
+  .demo-creds-box {
+    background: rgba(245, 192, 0, 0.1);
+    border: 1px dashed rgba(245, 192, 0, 0.5);
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    margin: 1rem 0;
+  }
+
+  .demo-creds-box p {
+    margin-bottom: 0.25rem;
+    color: #f5c000;
+    font-size: 0.9rem;
+  }
+
+  .demo-creds-box code {
+    background: #000;
+    color: #f5c000;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.95rem;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .btn-modal-primary {
+    background: #f5c000;
+    color: #141000;
+    font-weight: bold;
+    padding: 0.65rem 1.4rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    display: inline-block;
+  }
+
+  .btn-modal-primary:hover {
+    opacity: 0.85;
+  }
+
+  .btn-modal-secondary {
+    background: transparent;
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: normal;
+    padding: 0.65rem 1.2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+  }
+
+  .btn-modal-secondary:hover {
+    color: #fff;
+    border-color: #fff;
+  }
+
   @media screen and (max-width: 768px) {
     .body-container {
       grid-template-columns: 1fr;
@@ -160,13 +302,50 @@
 </style>
 
 <body>
+  <!-- Archived Project Notice Modal -->
+  <div id="archived-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-tag">Archived Project</span>
+        <h2>Fitness Forge Demo 🏋️</h2>
+      </div>
+      <div class="modal-body">
+        <p>
+          Fitness Forge is an archived school project. The cloud PostgreSQL instance has been retired, and the service now runs using its built-in local SQLite database.
+        </p>
+        <p>
+          You can explore the exercise catalog and favorites system using the pre-seeded demo user:
+        </p>
+        <div class="demo-creds-box">
+          <p>🔑 <strong>Demo Credentials:</strong></p>
+          <p>Username: <code>bob</code> &nbsp;|&nbsp; Password: <code>bobpass</code></p>
+        </div>
+        <p style="font-size: 0.85rem; color: #aaa;">
+          <em>Note: Changes and new accounts are kept in local storage and reset when the server spins down.</em>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-secondary" onclick="dismissArchivedModal()">Dismiss</button>
+        <a href="/login" class="btn-modal-primary">Sign In as Bob</a>
+      </div>
+    </div>
+  </div>
+
   <main class="background">
     <header class="header" id="myHeader">
       <nav>
-        <span class="logo">Fitness Forge</span>
+        <div class="logo-group">
+          <a href="/" style="text-decoration: none;"><span class="logo">Fitness Forge</span></a>
+          <span class="archived-badge">Archived Project</span>
+        </div>
         {% if current_user.is_authenticated %}
         <div class="nav-items">
+          <a href="/home">Routines</a>
           <a href="/api/logout">Log Out</a>
+        </div>
+        {% else %}
+        <div class="nav-items">
+          <a href="/login">Sign In</a>
         </div>
         {% endif %}
       </nav>
@@ -184,9 +363,37 @@
           <div class="column-right">
             <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
           </div>
+        {% else %}
+          <div class="column-left">
+            <div class="card glass">
+              <h1>Welcome back!</h1>
+              <p>Logged in as <strong>{{ current_user.username }}</strong>. Access your exercises and routines.</p>
+              <a href="/home"><button>View Routines</button></a>
+            </div>
+          </div>
+          <div class="column-right">
+            <img src="{{ url_for('static', filename='fitnessWoman.png') }}" alt="image">
+          </div>
         {% endif %}
+      </div>
     </section>
   </main>
-</body> 
+
+  <script>
+    function dismissArchivedModal() {
+      sessionStorage.setItem('fitnessforge_modal_dismissed', 'true');
+      var modal = document.getElementById('archived-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!sessionStorage.getItem('fitnessforge_modal_dismissed')) {
+        var modal = document.getElementById('archived-modal');
+        if (modal) modal.style.display = 'flex';
+      }
+    });
+  </script>
+</body>
 
 </html>
+
